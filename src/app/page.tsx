@@ -1,35 +1,39 @@
-import Image from "next/image";
+"use client";
+
+import { lazy, Suspense } from "react";
+import { motion } from "framer-motion";
+import logo from "@/assets/coin_cartel_logo.png";
+
+// Lazy load components
+const Navbar = lazy(() => import("@/components/common/Navbar"));
+const Hero = lazy(() => import("@/components/common/Hero"));
+const ValueProposition = lazy(() => import("@/components/common/ValueProposition"))
+const SecuritySection = lazy(() => import("@/components/common/SecuritySection"))
+const FinalCTA = lazy(() => import("@/components/common/FinalCTA"))
+
+
+// Loading component
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#161932]">
+    <motion.div
+      animate={{ rotate: 360 }}
+      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      className="w-12 h-12 border-4 border-[#fe6d4c] border-t-transparent rounded-full"
+    />
+  </div>
+);
 
 export default function Home() {
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white px-6 text-center">
-      {/* Logo / Name */}
-      <h1 className="text-4xl md:text-6xl font-bold mb-4">
-        🚀 The Coin Cartel Community
-      </h1>
-
-      {/* Subtitle */}
-      <p className="text-lg md:text-xl text-gray-300 max-w-xl mb-8">
-        Your trusted gateway to crypto insights.
-        <br />Live data, alpha calls, and wallet-secured VIP access — launching soon.
-      </p>
-
-      {/* Countdown or Coming Soon Tag */}
-      <div className="bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 shadow-xl mb-8">
-        <span className="text-2xl md:text-3xl font-semibold">
-          ⏳ Coming Soon
-        </span>
-      </div>
-
-      {/* Footer / Trust */}
-      <div className="mt-10 text-sm text-gray-500">
-        🔑 Wallet-secured • 🛡 No spam • 💎 Only signal
-      </div>
-    </main>
+    <div className="bg-[#161932] min-h-screen flex flex-col">
+      <Suspense fallback={<LoadingSpinner />}>
+        <Navbar logo={logo.src} />
+        <Hero logo={logo.src} />
+        <ValueProposition />
+        <SecuritySection />
+        <FinalCTA />
+      </Suspense>
+    </div>
   );
 }
-
-
-// #fe6d4c
-// #161932
-// #f59b50
