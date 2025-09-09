@@ -25,3 +25,215 @@ body {
   color: var(--foreground);
   font-family: Outfit, Arial, Helvetica, sans-serif;
 }
+
+
+.gold-embossed-text {
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    1px 1px 0px rgba(0, 0, 0, 0.3),
+    -1px -1px 0px rgba(255, 255, 255, 0.2);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  display: inline-block;
+}
+
+.silver-embossed-text {
+  background: linear-gradient(135deg, #C0C0C0, #F5F5F5, #A8A8A8, #E8E8E8, #909090);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    1px 1px 0px rgba(0, 0, 0, 0.3),
+    -1px -1px 0px rgba(255, 255, 255, 0.2);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+
+  .gold-embossed-text,
+  .silver-embossed-text {
+    font-size: 2.5rem;
+  }
+}
+
+.metallic-red-button {
+  background: linear-gradient(145deg, #8B0000, #600000);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(139, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.metallic-gold-button {
+  background: linear-gradient(145deg, #bf953f, #8B7500);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(191, 149, 63, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.metallic-shine {
+  background: linear-gradient(120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.metallic-red-button:hover .metallic-shine,
+.metallic-gold-button:hover .metallic-shine {
+  opacity: 1;
+}
+
+.button-bevel {
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(0, 0, 0, 0.1) 100%);
+  border-radius: 0.75rem;
+  pointer-events: none;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.metallic-red-button:active,
+.metallic-gold-button:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(139, 0, 0, 0.3),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+}
+
+
+.gold-embossed-text1 {
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    2px 2px 0px rgba(0, 0, 0, 0.8),
+    -1px -1px 0px rgba(255, 255, 255, 0.1);
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-100px);
+  }
+
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-slow {
+  0% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.hexagon-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to right, #8B0000 1px, transparent 1px),
+    linear-gradient(to bottom, #8B0000 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: radial-gradient(circle at center, black 20%, transparent 70%);
+}
+
+.radar-sweep {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(transparent 0deg, rgba(139, 0, 0, 0.2) 10deg, transparent 20deg);
+  animation: spin-slow 4s linear infinite;
+}
+
+.radar-sweep::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background: radial-gradient(circle, transparent 30%, rgba(139, 0, 0, 0.1) 100%);
+  border-radius: 50%;
+}
+
+.radar-sweep::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 50%;
+  background: linear-gradient(to top, transparent, #8B0000, transparent);
+  transform-origin: bottom center;
+  animation: spin-slow 2s linear infinite;
+}

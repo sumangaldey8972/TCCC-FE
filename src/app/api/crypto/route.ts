@@ -1,6 +1,19 @@
 import { NextResponse } from "next/server";
 
-let cachedData: any = null;
+export type CryptoData = {
+    bitcoin: {
+        usd: number;
+        change: number;
+    };
+    ethereum: {
+        usd: number;
+        change: number;
+    };
+    lastUpdated: number;
+    error?: string;
+};
+
+let cachedData: CryptoData | null = null;
 let lastFetchTime = 0;
 const CACHE_DURATION = 30 * 1000; // 30 seconds
 
