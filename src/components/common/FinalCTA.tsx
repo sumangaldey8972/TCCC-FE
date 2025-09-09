@@ -69,40 +69,7 @@ const GangstaCryptoCTA = () => {
             ctx.shadowBlur = 15;
             ctx.shadowColor = '#ff0000';
 
-            // Draw barbed wire effect
-            const drawBarbedWire = (x: number, y: number, width: number) => {
-                ctx.beginPath();
-                const segments = 20;
-                const segmentWidth = width / segments;
 
-                for (let i = 0; i <= segments; i++) {
-                    const pointX = x + i * segmentWidth;
-                    const wave = Math.sin(time * 2 + i * 0.5) * 5;
-                    const pointY = y + wave;
-
-                    if (i === 0) {
-                        ctx.moveTo(pointX, pointY);
-                    } else {
-                        ctx.lineTo(pointX, pointY);
-                    }
-
-                    // Draw barbs
-                    if (i % 2 === 0 && i > 0 && i < segments) {
-                        ctx.moveTo(pointX, pointY);
-                        ctx.lineTo(pointX - 5, pointY - 8);
-                        ctx.moveTo(pointX, pointY);
-                        ctx.lineTo(pointX + 5, pointY - 8);
-                    }
-                }
-
-                ctx.stroke();
-            };
-
-            // Draw border with barbed wire effect
-            drawBarbedWire(10, 15, canvas.width - 20);
-            drawBarbedWire(10, canvas.height - 15, canvas.width - 20);
-            drawBarbedWire(15, 10, canvas.height - 20);
-            drawBarbedWire(canvas.width - 15, 10, canvas.height - 20);
 
             // Draw corner skulls
             const drawSkull = (x: number, y: number, size: number) => {
