@@ -114,9 +114,9 @@ export default function Home() {
           showParticles={showParticles}
         />
         <ValueProposition />
+        <DexScreenerWidget />
         <SecuritySection />
         <FinalCTA />
-        <DexScreenerWidget />
       </Suspense>
     </div>
   );
