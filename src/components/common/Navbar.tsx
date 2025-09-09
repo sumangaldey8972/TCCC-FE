@@ -143,7 +143,7 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
                 {/* Desktop Menu */}
                 <nav className="hidden lg:flex items-center space-x-4">
                     {/* Animated crypto price ticker */}
-                    {/* <motion.div
+                    <motion.div
                         className="hidden xl:flex items-center space-x-6 px-4 py-2 rounded-lg bg-[#ffffff08] border border-[#ffffff15]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -154,12 +154,12 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
                             <Coins size={14} className="text-[#f59b50] mr-1" />
                             <span className="text-gray-300 mr-1">BTC:</span>
                             <span className="text-green-400 font-medium">
-                                {data ? `$${data.bitcoin.usd.toLocaleString()}` : "--"}
+                                {data ? `$${data?.bitcoin?.usd?.toLocaleString()}` : "--"}
                             </span>
                             <span
-                                className={`ml-1 ${data && data.bitcoin.change >= 0 ? "text-green-400" : "text-red-400"}`}
+                                className={`ml-1 ${data && data?.bitcoin?.change >= 0 ? "text-green-400" : "text-red-400"}`}
                             >
-                                {data ? `${data.bitcoin.change.toFixed(2)}%` : "--"}
+                                {data ? `${data?.bitcoin?.change?.toFixed(2)}%` : "--"}
                             </span>
                         </div>
 
@@ -169,15 +169,15 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
                             <Coins size={14} className="text-[#f59b50] mr-1" />
                             <span className="text-gray-300 mr-1">ETH:</span>
                             <span className="text-green-400 font-medium">
-                                {data ? `$${data.ethereum.usd.toLocaleString()}` : "--"}
+                                {data ? `$${data?.ethereum?.usd?.toLocaleString()}` : "--"}
                             </span>
                             <span
-                                className={`ml-1 ${data && data.ethereum.change >= 0 ? "text-green-400" : "text-red-400"}`}
+                                className={`ml-1 ${data && data?.ethereum?.change >= 0 ? "text-green-400" : "text-red-400"}`}
                             >
-                                {data ? `${data.ethereum.change.toFixed(2)}%` : "--"}
+                                {data ? `${data?.ethereum?.change?.toFixed(2)}%` : "--"}
                             </span>
                         </div>
-                    </motion.div> */}
+                    </motion.div>
 
 
                     {/* Telegram Channel Button */}
@@ -382,20 +382,20 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
                         </motion.div>
 
                         {/* Mobile crypto ticker */}
-                        {/* <div className="w-3/4 mt-4 pt-4 border-t border-gray-700">
+                        <div className="w-3/4 mt-4 pt-4 border-t border-gray-700">
                             <div className="flex justify-between text-sm">
                                 <div className="flex items-center">
                                     <Coins size={12} className="text-[#f59b50] mr-1" />
                                     <span className="text-gray-400">BTC:</span>
-                                    <span className="text-green-400 ml-1">{data?.error ? "--" : `$${data?.bitcoin?.usd?.toLocaleString()}`}</span>
+                                    <span className="text-green-400 ml-1">{data ? `$${data?.bitcoin?.usd?.toLocaleString()}` : "--"}</span>
                                 </div>
                                 <div className="flex items-center">
                                     <Coins size={12} className="text-[#f59b50] mr-1" />
                                     <span className="text-gray-400">ETH:</span>
-                                    <span className="text-green-400 ml-1">{data?.error ? "--" : `$${data?.ethereum?.usd?.toLocaleString()}`} </span>
+                                    <span className="text-green-400 ml-1">{data ? `$${data?.ethereum?.usd?.toLocaleString()}` : "--"} </span>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                     </motion.nav>
                 )}
             </AnimatePresence>
