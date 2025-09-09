@@ -26,9 +26,8 @@ export async function GET() {
     }
 
     try {
-        // ✅ Use timeout to prevent Vercel function from hanging forever
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
+        const timeout = setTimeout(() => controller.abort(), 5000);
 
         const [btcRes, ethRes] = await Promise.all([
             fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT", {
@@ -49,7 +48,6 @@ export async function GET() {
                 ethStatus: ethRes.status,
             });
 
-            // ✅ Return fallback data if Binance API fails
             return NextResponse.json(
                 {
                     bitcoin: { usd: 0, change: 0 },
@@ -57,13 +55,12 @@ export async function GET() {
                     lastUpdated: now,
                     error: "Binance API returned non-OK status",
                 },
-                { status: 200 } // return 200 so frontend doesn't break
+                { status: 200 }
             );
         }
 
         const [btc, eth] = await Promise.all([btcRes.json(), ethRes.json()]);
 
-        // ✅ Validate response shape
         if (!btc?.lastPrice || !eth?.lastPrice) {
             console.error("Unexpected Binance API response", { btc, eth });
 
@@ -93,10 +90,14 @@ export async function GET() {
         lastFetchTime = now;
 
         return NextResponse.json(cachedData);
-    } catch (error: any) {
-        console.error("Error fetching crypto prices:", error?.message || error);
+    } catch (error: unknown) {
+        // ✅ Type-safe error logging
+        if (error instanceof Error) {
+            console.error("Error fetching crypto prices:", error.message);
+        } else {
+            console.error("Unknown error fetching crypto prices:", error);
+        }
 
-        // ✅ Return last good cache instead of 500
         if (cachedData) {
             return NextResponse.json({
                 ...cachedData,
@@ -104,7 +105,6 @@ export async function GET() {
             });
         }
 
-        // ✅ Safe fallback when no cache exists
         return NextResponse.json(
             {
                 bitcoin: { usd: 0, change: 0 },
@@ -112,7 +112,7 @@ export async function GET() {
                 lastUpdated: now,
                 error: "Failed to fetch crypto prices",
             },
-            { status: 200 } // still return 200 to avoid frontend crash
+            { status: 200 }
         );
     }
 }
