@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Wallet, Sparkles, MessageCircle } from "lucide-react";
+import { Menu, X, Wallet, Sparkles, MessageCircle, Flame, Crown } from "lucide-react";
 import { CryptoData } from "@/app/api/crypto/route";
 
 interface NavbarProps {
@@ -121,8 +121,19 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
                     </motion.h1>
                 </motion.div>
 
+                <div className="flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-3 rounded-lg border border-gray-600 shadow-lg shadow-yellow-500/10">
+                    <div className="flex items-center space-x-2">
+                        <Crown className="text-yellow-500 h-5 w-5 filter drop-shadow-[0_0_3px_rgba(255,215,0,0.5)]" />
+                        <p className="text-gray-100 font-bold text-sm">
+                            <span className="bg-gradient-to-r from-yellow-800 to-yellow-900 text-yellow-300 px-3 py-1 rounded-md mr-2 border border-yellow-600">$99</span>
+                            <span className="text-gray-300">FOR THE FIRST 100 <span className="text-yellow-400">ELITE CREW</span></span>
+                        </p>
+                    </div>
+                </div>
+
                 {/* Desktop Menu */}
                 <nav className="hidden lg:flex items-center space-x-4">
+
                     {/* Telegram Channel Button */}
                     <motion.div
                         className="relative"
