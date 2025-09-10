@@ -231,87 +231,79 @@ const GangstaCryptoCTA = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.7 }}
                             >
-                                <span className="block text-white bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-yellow-500">
+                                <span className="block text-white bg-clip-text text-transparent bg-gradient-to-r from-red-700 via-red-800 to-amber-600">
                                     JOIN THE CRYPTO CARTEL
-                                </span>
-                                <span className="block mt-4 text-xl md:text-2xl text-red-600">
-                                    ONLY <span className="text-yellow-500">{remainingSpots}</span> SPOTS LEFT
                                 </span>
                             </motion.h2>
 
-                            <p className="text-gray-400 max-w-xl mx-auto text-lg font-medium uppercase tracking-wide">
+                            <p className="text-gray-400 max-w-xl mx-auto text-lg font-medium uppercase tracking-wide mb-8">
                                 Get in before we close the gates. This ain&apos;t for everyone.
                             </p>
-                        </div>
 
-                        {/* Progress bar showing spots taken - styled like ammo count */}
-                        <div className="max-w-md mx-auto mb-10">
-                            <div className="flex justify-between text-sm text-gray-400 mb-2">
-                                <span className="flex items-center">
-                                    <Zap size={16} className="mr-2 text-yellow-500" />
-                                    {100 - remainingSpots}/100 FILLED
-                                </span>
-                                <span className="flex items-center">
-                                    {remainingSpots} REMAINING
-                                    <Skull size={16} className="ml-2 text-red-600" />
-                                </span>
-                            </div>
-                            <div className="h-3 bg-gray-800 rounded-full overflow-hidden border border-gray-700">
-                                <motion.div
-                                    className="h-full bg-gradient-to-r from-red-700 to-yellow-600 rounded-full"
-                                    initial={{ width: '0%' }}
-                                    animate={{ width: `${100 - remainingSpots}%` }}
-                                    transition={{ duration: 1.5, ease: "easeOut" }}
-                                />
-                            </div>
-                        </div>
-
-                        {/* CTA Button with aggressive styling */}
-                        <div className="flex justify-center">
-                            <motion.button
-                                onClick={() => {
-                                    const pricingSection = document.getElementById('pricing');
-                                    if (pricingSection) {
-                                        pricingSection.scrollIntoView({ behavior: 'smooth' });
-                                    }
+                            {/* Exclusive Offer Section */}
+                            <motion.div
+                                className="relative bg-gradient-to-br from-gray-800 via-gray-900 to-stone-900 border-2 border-amber-500 rounded-xl p-6 md:p-8 shadow-lg max-w-2xl mx-auto"
+                                style={{
+                                    boxShadow: "0 0 15px rgba(180, 130, 50, 0.4)",
+                                    backgroundImage: "radial-gradient(circle at top right, rgba(120, 0, 0, 0.3), rgba(30, 30, 30, 0.7)), linear-gradient(to bottom, rgb(30, 30, 30), rgb(10, 10, 10))"
                                 }}
-                                className="group relative bg-black hover:bg-red-900 border-2 border-yellow-500 hover:border-red-600 text-white font-bold text-lg py-4 px-10 rounded-md transition-all duration-300 hover:shadow-lg hover:shadow-red-600/30 overflow-hidden uppercase tracking-wider"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.3 }}
                             >
-                                <span className="flex items-center justify-center relative z-10">
-                                    <Shield className="w-5 h-5 mr-3 text-yellow-500" />
-                                    ENTER THE UNDERWORLD
-                                    <ArrowRight className="w-5 h-5 ml-3 transform group-hover:translate-x-1 transition-transform" />
-                                </span>
-
-                                {/* Button shine effect */}
-                                <div className="absolute inset-0 -skew-x-12 overflow-hidden">
-                                    <div className="absolute inset-0 transition-all duration-700 group-hover:translate-x-full group-hover:opacity-0 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
+                                {/* Decorative elements */}
+                                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-amber-500 to-amber-700 text-black font-bold px-4 py-1 rounded-full text-sm uppercase tracking-wider border border-amber-300">
+                                    🔥 Exclusive Limited Offer
                                 </div>
 
-                                {/* Red glow on hover */}
-                                <div className="absolute inset-0 rounded-md bg-red-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                            </motion.button>
+                                <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-amber-500 animate-pulse" style={{ boxShadow: "0 0 8px rgba(255, 195, 45, 0.8)" }}></div>
+                                <div className="absolute bottom-2 left-2 w-4 h-4 rounded-full bg-amber-500 animate-pulse" style={{ boxShadow: "0 0 8px rgba(255, 195, 45, 0.8)" }}></div>
+
+                                <motion.h3
+                                    className="text-2xl md:text-3xl font-bold text-white mb-4 uppercase"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.5, delay: 0.5 }}
+                                >
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300">
+                                        FOUNDING MEMBER ACCESS
+                                    </span>
+                                </motion.h3>
+
+                                <motion.p
+                                    className="text-lg text-gray-200 mb-6 leading-relaxed"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.5, delay: 0.7 }}
+                                >
+                                    For our first <span className="text-amber-400 font-bold" style={{ textShadow: "0 0 5px rgba(255, 195, 45, 0.7)" }}>100 elite members</span> only:
+                                    <br />
+                                    <span className="text-2xl font-bold text-white bg-gradient-to-r from-amber-500 to-amber-300 bg-clip-text text-transparent">
+                                        Full Access Subscription at $99
+                                    </span>
+                                    <br />
+                                    <span className="text-amber-200 text-sm">(One week only - then price increases permanently)</span>
+                                </motion.p>
+                            </motion.div>
                         </div>
 
-                        {/* Trust badges with gangsta style */}
-                        <div className="flex flex-wrap justify-center gap-8 mt-12 pt-12 border-t border-gray-800">
-                            <div className="flex items-center text-gray-400 text-sm font-bold uppercase tracking-wide">
-                                <div className="w-8 h-8 rounded-full bg-red-800 flex items-center justify-center mr-3">
-                                    <Skull size={16} className="text-white" />
+                        {/* Trust badges with metallic style */}
+                        <div className="flex flex-wrap justify-center gap-8 mt-12 pt-12 border-t border-amber-800/30">
+                            <div className="flex items-center text-amber-200 text-sm font-bold uppercase tracking-wide">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-900 to-amber-700 flex items-center justify-center mr-3 border border-amber-600">
+                                    <Skull size={16} className="text-amber-100" />
                                 </div>
                                 NO RATS ALLOWED
                             </div>
-                            <div className="flex items-center text-gray-400 text-sm font-bold uppercase tracking-wide">
-                                <div className="w-8 h-8 rounded-full bg-yellow-600 flex items-center justify-center mr-3">
-                                    <Gem size={16} className="text-white" />
+                            <div className="flex items-center text-amber-200 text-sm font-bold uppercase tracking-wide">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 flex items-center justify-center mr-3 border border-amber-400">
+                                    <Gem size={16} className="text-amber-100" />
                                 </div>
                                 BLOOD-BOUND SECURITY
                             </div>
-                            <div className="flex items-center text-gray-400 text-sm font-bold uppercase tracking-wide">
-                                <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center mr-3">
-                                    <Zap size={16} className="text-yellow-500" />
+                            <div className="flex items-center text-amber-200 text-sm font-bold uppercase tracking-wide">
+                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-amber-700 flex items-center justify-center mr-3 border border-amber-500">
+                                    <Zap size={16} className="text-amber-200" />
                                 </div>
                                 LIGHTNING TRANSACTIONS
                             </div>
