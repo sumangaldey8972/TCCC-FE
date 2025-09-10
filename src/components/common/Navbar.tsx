@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Wallet, Coins, Sparkles, MessageCircle } from "lucide-react";
+import { Menu, X, Wallet, Sparkles, MessageCircle } from "lucide-react";
 import { CryptoData } from "@/app/api/crypto/route";
 
 interface NavbarProps {
@@ -17,25 +17,6 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const buttonRef = useRef<HTMLDivElement>(null);
-    const [data, setData] = useState<CryptoData | null>(null)
-
-    useEffect(() => {
-        async function fetchPrices() {
-            try {
-                const res = await fetch("/api/crypto");
-                const json = await res.json();
-                setData(json);
-            } catch (err) {
-                console.error("Error fetching prices:", err);
-            }
-        }
-
-        fetchPrices();
-        const interval = setInterval(fetchPrices, 60000); // refresh every 60 sec
-        return () => clearInterval(interval);
-    }, []);
-
-    // console.log("checking data", data)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -142,44 +123,6 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
 
                 {/* Desktop Menu */}
                 <nav className="hidden lg:flex items-center space-x-4">
-                    {/* Animated crypto price ticker */}
-                    {/* <motion.div
-                        className="hidden xl:flex items-center space-x-6 px-4 py-2 rounded-lg bg-[#ffffff08] border border-[#ffffff15]"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                    >
-
-                        <div className="flex items-center text-sm">
-                            <Coins size={14} className="text-[#f59b50] mr-1" />
-                            <span className="text-gray-300 mr-1">BTC:</span>
-                            <span className="text-green-400 font-medium">
-                                {data ? `$${data?.bitcoin?.usd?.toLocaleString()}` : "--"}
-                            </span>
-                            <span
-                                className={`ml-1 ${data && data?.bitcoin?.change >= 0 ? "text-green-400" : "text-red-400"}`}
-                            >
-                                {data ? `${data?.bitcoin?.change?.toFixed(2)}%` : "--"}
-                            </span>
-                        </div>
-
-                        <div className="h-4 w-px bg-gray-600"></div>
-
-                        <div className="flex items-center text-sm">
-                            <Coins size={14} className="text-[#f59b50] mr-1" />
-                            <span className="text-gray-300 mr-1">ETH:</span>
-                            <span className="text-green-400 font-medium">
-                                {data ? `$${data?.ethereum?.usd?.toLocaleString()}` : "--"}
-                            </span>
-                            <span
-                                className={`ml-1 ${data && data?.ethereum?.change >= 0 ? "text-green-400" : "text-red-400"}`}
-                            >
-                                {data ? `${data?.ethereum?.change?.toFixed(2)}%` : "--"}
-                            </span>
-                        </div>
-                    </motion.div> */}
-
-
                     {/* Telegram Channel Button */}
                     <motion.div
                         className="relative"

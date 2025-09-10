@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { headers } from "next/headers";
+import ContextProvider from "@/context";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,17 +25,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const headerObj = await headers()
+  const cookies = headerObj.get('cookie')
+
   return (
     <html lang="en">
       <body
         className={`${poppins.variable} antialiased`}
       >
-        {children}
+        <ContextProvider cookies={cookies} >
+          {children}
+        </ContextProvider>
       </body>
     </html>
   );
