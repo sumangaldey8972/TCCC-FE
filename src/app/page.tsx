@@ -7,9 +7,10 @@ import { useAccount } from "wagmi";
 import logo from "@/assets/logo_svg.png";
 import DexScreenerWidget from "@/components/DexScreener/DexScreenerWidget";
 import { useAppKit } from "@reown/appkit/react";
+import Navbar from "@/components/common/Navbar";
+import Hero from "@/components/common/Hero";
+import appClient from "@/lib/appClient";
 
-const Navbar = lazy(() => import("@/components/common/Navbar"));
-const Hero = lazy(() => import("@/components/common/Hero"));
 const ValueProposition = lazy(() => import("@/components/common/ValueProposition"));
 const SecuritySection = lazy(() => import("@/components/common/SecuritySection"));
 const FinalCTA = lazy(() => import("@/components/common/FinalCTA"));
@@ -32,10 +33,12 @@ export default function Home() {
   const [showParticles, setShowParticles] = useState(false);
   const prevConnectedRef = useRef<boolean>(false);
 
-  const { isConnected } = useAccount();
+  const { isConnected, address, connector } = useAccount();
+
   const [playWalletSound] = useSound(soundSrc, { volume: 0.8, interrupt: true });
   const { open } = useAppKit();
 
+  console.log({ address })
 
   // Preload global audio and manage automatic click sounds
   useEffect(() => {
@@ -72,14 +75,30 @@ export default function Home() {
     const justConnected = !prevConnectedRef.current && isConnected;
     prevConnectedRef.current = isConnected;
 
-    if (justConnected) {
+    if (justConnected && address) {
       setShowParticles(true);
       setTimeout(() => setShowParticles(false), 2000);
       playWalletSound();
+      addWalletAddress()
     }
-  }, [isConnected, playWalletSound]);
+  }, [isConnected, address, playWalletSound]);
 
   const handleWalletConnect = () => open();
+
+  const addWalletAddress = async () => {
+    const payload = {
+      address,
+      walletType: connector?.name,
+    }
+
+    try {
+      const res = await appClient.post(`/api/wallet/add`, payload)
+
+    } catch (error) {
+      console.log("Getting error while adding wallets", error as Error)
+
+    }
+  }
 
   return (
     <div className="bg-[#1e2022] min-h-screen flex flex-col">
