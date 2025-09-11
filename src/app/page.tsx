@@ -7,9 +7,9 @@ import { useAccount } from "wagmi";
 import logo from "@/assets/logo_svg.png";
 import DexScreenerWidget from "@/components/DexScreener/DexScreenerWidget";
 import { useAppKit } from "@reown/appkit/react";
+import Navbar from "@/components/common/Navbar";
+import Hero from "@/components/common/Hero";
 
-const Navbar = lazy(() => import("@/components/common/Navbar"));
-const Hero = lazy(() => import("@/components/common/Hero"));
 const ValueProposition = lazy(() => import("@/components/common/ValueProposition"));
 const SecuritySection = lazy(() => import("@/components/common/SecuritySection"));
 const FinalCTA = lazy(() => import("@/components/common/FinalCTA"));
@@ -32,10 +32,11 @@ export default function Home() {
   const [showParticles, setShowParticles] = useState(false);
   const prevConnectedRef = useRef<boolean>(false);
 
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const [playWalletSound] = useSound(soundSrc, { volume: 0.8, interrupt: true });
   const { open } = useAppKit();
 
+  console.log({ address })
 
   // Preload global audio and manage automatic click sounds
   useEffect(() => {
