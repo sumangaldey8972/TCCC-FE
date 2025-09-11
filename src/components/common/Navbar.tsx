@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Wallet, Sparkles, MessageCircle, Flame, Crown } from "lucide-react";
-import { CryptoData } from "@/app/api/crypto/route";
 
 interface NavbarProps {
     logo: string;
