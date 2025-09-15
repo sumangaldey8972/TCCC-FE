@@ -5,7 +5,9 @@ import {
     Key,
     Bell,
     Users,
-    Coins
+    Coins,
+    Sparkle,
+    Sparkles
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -52,6 +54,11 @@ const ValueProposition = () => {
             icon: <Users size={28} />,
             title: "CURATED COMMUNITY",
             description: "High-signal updates, no noise"
+        },
+        {
+            icon: <Sparkles size={28} />, // <-- Choose an NFT-related icon
+            title: "NFT INTEGRATION",
+            description: "Exclusive community NFTs & token-gated access"
         }
     ];
 
