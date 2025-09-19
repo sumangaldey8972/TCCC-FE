@@ -237,3 +237,30 @@ body {
   transform-origin: bottom center;
   animation: spin-slow 2s linear infinite;
 }
+
+
+.metallic-gold-red-button {
+  background: linear-gradient(145deg, #b98900, #8b0000);
+  box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4),
+    0 0 2px 1px rgba(255, 215, 0, 0.3) inset;
+}
+
+.metallic-shine-gold-red {
+  background: linear-gradient(120deg,
+      rgba(255, 215, 0, 0) 30%,
+      rgba(255, 215, 0, 0.3) 50%,
+      rgba(255, 215, 0, 0) 70%);
+  opacity: 0.4;
+  transition: all 0.5s ease;
+  transform: translateX(-100%);
+}
+
+.metallic-gold-red-button:hover .metallic-shine-gold-red {
+  transform: translateX(100%);
+}
+
+.button-bevel-gold-red {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 0 0 rgba(255, 215, 0, 0.3) inset,
+    0 -2px 0 0 rgba(120, 0, 0, 0.4) inset;
+}

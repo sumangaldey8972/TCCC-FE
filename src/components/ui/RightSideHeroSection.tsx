@@ -36,14 +36,14 @@ const RightSideHeroSection = ({ logo }: Props) => {
             initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative flex flex-col items-center justify-center w-full"
+            className="relative flex flex-col items-center justify-center"
         >
             <motion.div className="relative z-10 w-full flex justify-center">
                 <Image
                     src={logo}
                     alt="Coin Cartel Logo"
-                    width={1000}
-                    height={1000}
+                    width={600}
+                    height={600}
                     className="drop-shadow-2xl max-w-full h-auto"
                     priority
                     style={{

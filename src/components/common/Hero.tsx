@@ -1,11 +1,13 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Users, Star, Zap, Wallet, Sparkles, MessageCircle, Crown } from "lucide-react";
-import { useRef } from "react";
+import { Users, Star, Zap, Wallet, Sparkles, MessageCircle, Crown, Rocket } from "lucide-react";
+import { useRef, useState } from "react";
 import QuickAssurance from "./QuickAssurance";
 import RightSideHeroSection from "../ui/RightSideHeroSection";
 import { SpaceBackground } from "../ui/SpaceBackground";
+import CoinLaunchpadDrawer from "./CoinLaunchpadDrawer";
+import { Coin } from "@/types/coin";
 
 interface HeroProps {
     logo: string;
@@ -14,8 +16,168 @@ interface HeroProps {
     showParticles: boolean
 }
 
+// let upcomingCoins: Coin[] = [
+//     {
+//         "id": 1,
+//         "name": "LunaX",
+//         "symbol": "LNX",
+//         "logo": "/coins/lunax.png",
+//         "launchDate": "2025-09-20T18:00:00Z",
+//         "description": "A next-gen DeFi coin aiming to bring cross-chain staking solutions.",
+//         "status": "upcoming"
+//     },
+//     {
+//         "id": 2,
+//         "name": "MetaPulse",
+//         "symbol": "MTP",
+//         "logo": "/coins/metapulse.png",
+//         "launchDate": "2025-10-02T15:00:00Z",
+//         "description": "The heartbeat of the metaverse economy with NFT integration.",
+//         "status": "upcoming"
+//     },
+//     {
+//         "id": 3,
+//         "name": "GreenCoin",
+//         "symbol": "GRN",
+//         "logo": "/coins/greencoin.png",
+//         "launchDate": "2025-10-15T12:00:00Z",
+//         "description": "A sustainable blockchain project that rewards eco-friendly activities.",
+//         "status": "upcoming"
+//     },
+//     {
+//         "id": 4,
+//         "name": "LunaX",
+//         "symbol": "LNX",
+//         "logo": "/coins/lunax.png",
+//         "launchDate": "2025-09-19T18:00:00Z",
+//         "description": "A next-gen DeFi coin aiming to bring cross-chain staking solutions.",
+//         "status": "upcoming"
+//     },
+//     {
+//         "id": 5,
+//         "name": "MetaPulse",
+//         "symbol": "MTP",
+//         "logo": "/coins/metapulse.png",
+//         "launchDate": "2025-10-02T15:00:00Z",
+//         "description": "The heartbeat of the metaverse economy with NFT integration.",
+//         "status": "upcoming"
+//     },
+//     {
+//         "id": 6,
+//         "name": "GreenCoin",
+//         "symbol": "GRN",
+//         "logo": "/coins/greencoin.png",
+//         "launchDate": "2025-10-15T12:00:00Z",
+//         "description": "A sustainable blockchain project that rewards eco-friendly activities.",
+//         "status": "upcoming"
+//     }
+// ]
+
+
+// let launchedCoins: Coin[] = [
+//     {
+//         "id": 1,
+//         "name": "CartelX",
+//         "symbol": "CTX",
+//         "logo": "/coins/cartelx.png",
+//         "launchDate": "2025-08-20T12:00:00Z",
+//         "description": "The first community-driven governance token launched by The Coin Cartel.",
+//         "status": "launched",
+//         "ath": "$1.42",
+//         "currentPrice": "$1.08",
+//         "holders": 1245
+//     },
+//     {
+//         "id": 2,
+//         "name": "PulseChainz",
+//         "symbol": "PLZ",
+//         "logo": "/coins/pulsechainz.png",
+//         "launchDate": "2025-07-10T16:00:00Z",
+//         "description": "A fast L2 scaling solution designed for speed and security.",
+//         "status": "launched",
+//         "ath": "$0.82",
+//         "currentPrice": "$0.55",
+//         "holders": 940
+//     },
+//     {
+//         "id": 3,
+//         "name": "CartelX",
+//         "symbol": "CTX",
+//         "logo": "/coins/cartelx.png",
+//         "launchDate": "2025-08-20T12:00:00Z",
+//         "description": "The first community-driven governance token launched by The Coin Cartel.",
+//         "status": "launched",
+//         "ath": "$1.42",
+//         "currentPrice": "$1.08",
+//         "holders": 1245
+//     },
+//     {
+//         "id": 4,
+//         "name": "PulseChainz",
+//         "symbol": "PLZ",
+//         "logo": "/coins/pulsechainz.png",
+//         "launchDate": "2025-07-10T16:00:00Z",
+//         "description": "A fast L2 scaling solution designed for speed and security.",
+//         "status": "launched",
+//         "ath": "$0.82",
+//         "currentPrice": "$0.55",
+//         "holders": 940
+//     },
+//     {
+//         "id": 5,
+//         "name": "CartelX",
+//         "symbol": "CTX",
+//         "logo": "/coins/cartelx.png",
+//         "launchDate": "2025-08-20T12:00:00Z",
+//         "description": "The first community-driven governance token launched by The Coin Cartel.",
+//         "status": "launched",
+//         "ath": "$1.42",
+//         "currentPrice": "$1.08",
+//         "holders": 1245
+//     },
+//     {
+//         "id": 6,
+//         "name": "PulseChainz",
+//         "symbol": "PLZ",
+//         "logo": "/coins/pulsechainz.png",
+//         "launchDate": "2025-07-10T16:00:00Z",
+//         "description": "A fast L2 scaling solution designed for speed and security.",
+//         "status": "launched",
+//         "ath": "$0.82",
+//         "currentPrice": "$0.55",
+//         "holders": 940
+//     },
+//     {
+//         "id": 7,
+//         "name": "CartelX",
+//         "symbol": "CTX",
+//         "logo": "/coins/cartelx.png",
+//         "launchDate": "2025-08-20T12:00:00Z",
+//         "description": "The first community-driven governance token launched by The Coin Cartel.",
+//         "status": "launched",
+//         "ath": "$1.42",
+//         "currentPrice": "$1.08",
+//         "holders": 1245
+//     },
+//     {
+//         "id": 8,
+//         "name": "PulseChainz",
+//         "symbol": "PLZ",
+//         "logo": "/coins/pulsechainz.png",
+//         "launchDate": "2025-07-10T16:00:00Z",
+//         "description": "A fast L2 scaling solution designed for speed and security.",
+//         "status": "launched",
+//         "ath": "$0.82",
+//         "currentPrice": "$0.55",
+//         "holders": 940
+//     }
+// ]
+
+
 const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroProps) => {
     const buttonRef = useRef<HTMLDivElement>(null)
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
 
     // Floating particles animation
     const Particle = ({ size, positionX, positionY, delay }: {
@@ -51,7 +213,7 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
 
 
     return (
-        <section id="home" className="pt-32 pb-20 px-4 md:px-8 relative overflow-hidden bg-[#0A0A0A]">
+        <section id="home" className="pt-32 pb-16 px-4 md:px-0 relative overflow-hidden bg-[#0A0A0A]">
 
             {/* Space background */}
             <SpaceBackground />
@@ -59,7 +221,7 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
             {/* Subtle texture for matte effect */}
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+CiAgPHJlY3Qwd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMEEwQTBBIj48L3JlY3Q+CiAgPHBhdGggZD0iTTAgMEw2MCA2ME02MCAwTDAgNjAiIHN0cm9rZT0iIzEyMTIxMiIgc3Ryb2tlLXdpZHRoPSIxIj48L3BhdGg+Cjwvc3ZnPg==')] opacity-30 z-0"></div>
 
-            <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
+            <div className="container mx-auto flex flex-col md:flex-row items-center justify-between relative z-10">
                 {/* Hero Text */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
@@ -123,7 +285,7 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
                                 href="https://t.me/THE_CARTEL_COMMUNITY"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-gradient-to-b from-[#8B0000] to-[#600000] text-gray-200 px-8 py-4 rounded-xl font-bold flex items-center justify-center space-x-2 group relative overflow-hidden border-2 border-[#700000] metallic-red-button"
+                                className="bg-gradient-to-b from-[#8B0000] to-[#600000] text-gray-200 px-4 py-4 rounded-xl font-bold flex items-center justify-center space-x-2 group relative overflow-hidden border-2 border-[#700000] metallic-red-button"
                                 whileHover={{
                                     boxShadow: "0 0 20px rgba(139, 0, 0, 0.7)",
                                     y: -2
@@ -163,7 +325,7 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
                                     y: -2
                                 }}
                                 whileTap={{ scale: 0.95 }}
-                                className={`flex items-center space-x-2 px-8 py-4 rounded-xl font-bold transition-all relative overflow-hidden border-2 ${isConnected
+                                className={`flex items-center space-x-2 px-4 py-4 rounded-xl font-bold transition-all relative overflow-hidden border-2 ${isConnected
                                     ? "bg-gradient-to-b from-[#bf953f] to-[#8B7500] text-[#0A0A0A] border-[#aa771c] metallic-gold-button"
                                     : "bg-gradient-to-b from-[#8B0000] to-[#600000] text-gray-200 border-[#700000] metallic-red-button"
                                     }`}
@@ -173,9 +335,6 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
 
                                 {/* Beveled edges */}
                                 <div className="absolute inset-0 button-bevel"></div>
-
-                                {/* Connection status indicator */}
-                                <div className={`absolute left-3 w-3 h-3 rounded-full z-10 ${isConnected ? "bg-[#0A0A0A] ring-2 ring-[#FFD700]" : "bg-gray-200 ring-2 ring-[#700000]"}`}></div>
 
                                 <Wallet size={20} className="drop-shadow-md z-10" />
                                 <span className="z-10 text-shadow">{isConnected ? "CONNECTED" : "CONNECT WALLET"}</span>
@@ -203,6 +362,38 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
                                     </motion.div>
                                 )}
                             </AnimatePresence>
+                        </motion.div>
+
+                        {/* Coin launch Button */}
+                        <motion.div
+                            className="relative"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => setIsDrawerOpen(true)}
+                        >
+                            <motion.a
+                                rel="noopener noreferrer"
+                                className="bg-gradient-to-b from-amber-600 via-amber-700 to-red-800 text-amber-100 px-4 py-4 rounded-xl font-bold flex items-center justify-center space-x-2 group relative overflow-hidden border-2 border-amber-400 metallic-gold-red-button"
+                                whileHover={{
+                                    boxShadow: "0 0 20px rgba(245, 158, 11, 0.7)",
+                                    y: -2
+                                }}
+                            >
+                                {/* Metallic shine effect */}
+                                <div className="absolute inset-0 metallic-shine-gold-red"></div>
+
+                                {/* Beveled edges */}
+                                <div className="absolute inset-0 button-bevel-gold-red"></div>
+
+                                <span className="relative z-10 text-shadow">CHECK NEW LAUNCHES</span>
+                                <motion.div
+                                    animate={{ y: [0, -4, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                    className="relative z-10"
+                                >
+                                    <Rocket size={20} className="drop-shadow-md text-amber-100" />
+                                </motion.div>
+                            </motion.a>
                         </motion.div>
                     </motion.div>
 
@@ -232,6 +423,13 @@ const Hero = ({ logo, isConnected, handleWalletConnect, showParticles }: HeroPro
                 {/* Hero Image */}
                 <RightSideHeroSection logo={logo} />
             </div>
+
+            <CoinLaunchpadDrawer
+                isOpen={isDrawerOpen}
+                onClose={() => setIsDrawerOpen(false)}
+            // upcomingCoins={upcomingCoins}
+            // launchedCoins={launchedCoins}
+            />
         </section>
     );
 };
