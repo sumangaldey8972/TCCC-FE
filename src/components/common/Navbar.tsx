@@ -120,7 +120,7 @@ const Navbar = ({ logo, isConnected, handleWalletConnect, showParticles }: Navba
                     </motion.h1>
                 </motion.div>
 
-                <div className="flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-3 rounded-lg border border-gray-600 shadow-lg shadow-yellow-500/10">
+                <div className="hidden md:block flex items-center justify-between bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-3 rounded-lg border border-gray-600 shadow-lg shadow-yellow-500/10">
                     <div className="flex items-center space-x-2">
                         <Crown className="text-yellow-500 h-5 w-5 filter drop-shadow-[0_0_3px_rgba(255,215,0,0.5)]" />
                         <p className="text-gray-100 font-bold text-sm">
