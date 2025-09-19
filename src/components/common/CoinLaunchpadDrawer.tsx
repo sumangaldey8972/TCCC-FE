@@ -3,29 +3,24 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Clock, TrendingUp, Users, Calendar, ArrowUpRight, Rocket, BarChart3, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import { X, Clock, Calendar, Rocket, BarChart3, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import { Coin, CoinStats } from '@/types/coin';
 import appClient from '@/lib/appClient';
 
 interface CoinLaunchpadDrawerProps {
     isOpen: boolean;
     onClose: () => void;
-    // upcomingCoins: Coin[];
-    // launchedCoins: Coin[];
 }
 
 const CoinLaunchpadDrawer: React.FC<CoinLaunchpadDrawerProps> = ({
     isOpen,
     onClose,
-    // upcomingCoins,
-    // launchedCoins
 }) => {
     const [activeTab, setActiveTab] = useState<'upcoming' | 'launched'>('upcoming');
     const [timeRemaining, setTimeRemaining] = useState<{ [key: number]: string }>({});
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
     const sliderRef = useRef<NodeJS.Timeout | null>(null);
-    const [data, setData] = useState<Coin[]>([])
     const [page, setPage] = useState(1)
     const [limit, setLimit] = useState(10)
     const [totalDocs, setTotalDocs] = useState(0)
